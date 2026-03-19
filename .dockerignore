@@ -1,6 +1,53 @@
 # =============================================================================
-# .gitignore - LilyPond Transcriptions
+# .dockerignore - LilyPond Transcriptions
+# Exclude files from Docker build context for faster builds
 # =============================================================================
+
+# -----------------------------------------------------------------------------
+# Git
+# -----------------------------------------------------------------------------
+.git/
+.gitignore
+.gitattributes
+
+# -----------------------------------------------------------------------------
+# Documentation (not needed in container)
+# -----------------------------------------------------------------------------
+README.md
+CLAUDE.md
+AGENTS.md
+LICENSE
+documents/
+*.md
+
+# -----------------------------------------------------------------------------
+# Editor and IDE files
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~
+
+# -----------------------------------------------------------------------------
+# OS generated files
+# -----------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+._*
+Thumbs.db
+Desktop.ini
+
+# -----------------------------------------------------------------------------
+# Output files (regenerated in container)
+# -----------------------------------------------------------------------------
+output/pdf/*
+output/midi/*
+
+# Keep .gitkeep for directory structure
+!output/**/.gitkeep
 
 # -----------------------------------------------------------------------------
 # LilyPond build artifacts
@@ -12,117 +59,28 @@
 *.eps
 *.ps
 *.svg
-
-# LilyPond intermediate/temp files
+*.log
 *.count
 *.dep
 *.toc
-*.log
 *.texi
 *.texidoc
 *.doctitle
 *.aux
 *.dvi
-
-# LilyPond point-and-click
 *.ly.dep
 
 # -----------------------------------------------------------------------------
-# Output directories (keep structure, ignore contents)
-# -----------------------------------------------------------------------------
-output/pdf/*
-output/midi/*
-!output/**/.gitkeep
-
-# -----------------------------------------------------------------------------
-# OS generated files
-# -----------------------------------------------------------------------------
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-._*
-.Spotlight-V100
-.Trashes
-
-# Windows
-Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# Linux
-*~
-.directory
-.Trash-*
-
-# -----------------------------------------------------------------------------
-# Editor and IDE files
-# -----------------------------------------------------------------------------
-# Vim
-*.swp
-*.swo
-*.swn
-*~
-.netrwhist
-Session.vim
-Sessionx.vim
-
-# Emacs
-\#*\#
-.#*
-*~
-*.elc
-.dir-locals.el
-
-# VS Code (keep extensions.json and tasks.json)
-.vscode/*
-!.vscode/extensions.json
-!.vscode/tasks.json
-
-# JetBrains IDEs
-.idea/
-*.iml
-
-# Sublime Text
-*.sublime-workspace
-*.sublime-project
-
-# -----------------------------------------------------------------------------
-# Docker
-# -----------------------------------------------------------------------------
-# Don't ignore docker-compose.yml or Dockerfile*
-
-# -----------------------------------------------------------------------------
-# Temporary and backup files
+# Temporary files
 # -----------------------------------------------------------------------------
 *.tmp
 *.temp
 *.bak
 *.backup
 *.old
-*.orig
-*.rej
-*.patch
 
 # -----------------------------------------------------------------------------
-# Logs
-# -----------------------------------------------------------------------------
-*.log
-logs/
-npm-debug.log*
-
-# -----------------------------------------------------------------------------
-# Local configuration (user-specific)
-# -----------------------------------------------------------------------------
-.env
-.env.local
-*.local
-
-# -----------------------------------------------------------------------------
-# Archives (shouldn't be in repo)
+# Archives
 # -----------------------------------------------------------------------------
 *.zip
 *.tar
@@ -130,3 +88,15 @@ npm-debug.log*
 *.tgz
 *.rar
 *.7z
+
+# -----------------------------------------------------------------------------
+# Local/environment files
+# -----------------------------------------------------------------------------
+.env
+.env.local
+*.local
+
+# -----------------------------------------------------------------------------
+# Docker files (prevent recursive context issues)
+# -----------------------------------------------------------------------------
+Dockerfile*

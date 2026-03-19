@@ -2,7 +2,7 @@
 
 % =============================================================================
 % LEAD SHEET TEMPLATE
-% For jazz transcriptions with melody and chord symbols
+% For transcriptions with melody and chord symbols
 % =============================================================================
 
 \header {
@@ -85,4 +85,7 @@ melody = \relative c'' {
       \melody
     }
   >>
+  \layout { }
+  % Uncomment the following line to generate MIDI output:
+  % \midi { \tempo 4 = 140 }
 }

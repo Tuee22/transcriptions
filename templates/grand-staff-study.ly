@@ -56,7 +56,7 @@ chordChanges = \chordmode {
 rightHand = \relative c'' {
   \key c \major
   \time 4/4
-  \tempo "Medium Swing" 4 = 140
+  \tempo "Moderato" 4 = 140
 
   % Enter right hand part below:
   % Typical voicings, melody lines, fills

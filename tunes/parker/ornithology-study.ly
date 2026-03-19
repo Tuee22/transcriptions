@@ -68,7 +68,7 @@ chordChanges = \chordmode {
 melody = \relative c'' {
   \key g \major
   \time 4/4
-  \tempo "Bebop" 4 = 200
+  \tempo 4 = 200
 
   % ==========
   % A SECTION

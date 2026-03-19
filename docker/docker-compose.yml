@@ -1,0 +1,42 @@
+services:
+  lilypond:
+    image: jeandeaual/lilypond:latest
+    volumes:
+      - ..:/work
+    working_dir: /work
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        set -e
+
+        mkdir -p /work/output/pdf /work/output/midi
+
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "Building all .ly files in tunes/"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        count=0
+        failed=0
+
+        for file in $$(find /work/tunes -name "*.ly" -type f 2>/dev/null); do
+          basename=$$(basename "$$file" .ly)
+          echo ""
+          echo "[$$(( count + 1 ))] $$file"
+
+          if lilypond --output="/work/output/pdf/$$basename" --pdf "$$file"; then
+            # Move MIDI if generated
+            [ -f "/work/output/pdf/$$basename.midi" ] && mv "/work/output/pdf/$$basename.midi" "/work/output/midi/$$basename.midi"
+            [ -f "/work/output/pdf/$$basename.mid" ] && mv "/work/output/pdf/$$basename.mid" "/work/output/midi/$$basename.mid"
+            count=$$((count + 1))
+            echo "Done: output/pdf/$$basename.pdf"
+          else
+            echo "FAILED: $$file"
+            failed=$$((failed + 1))
+          fi
+        done
+
+        echo ""
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "Rendered: $$count files"
+        [ "$$failed" -gt 0 ] && echo "Failed: $$failed files"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
