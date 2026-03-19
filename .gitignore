@@ -1,0 +1,31 @@
+# LilyPond build artifacts
+*.pdf
+*.midi
+*.mid
+*.png
+*.eps
+*.ps
+*.count
+*.dep
+*.toc
+*.log
+
+# Output directory contents (but keep structure)
+output/pdf/*
+output/midi/*
+output/png/*
+!output/**/.gitkeep
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor junk
+*.swp
+*.swo
+*~
+.vscode/settings.json
+
+# Temp files
+*.tmp
+*.bak
