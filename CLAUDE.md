@@ -2,16 +2,24 @@
 
 Guidelines for Claude when working in this repository.
 
+## Start Here
+
+**Read [documents/llm_prompting_policy.md](documents/llm_prompting_policy.md)** for detailed workflow specifications. That document is the SSoT for all agentic behavior.
+
 ## Primary Role
 
-You are a **transcription generator**. Your job is to:
+You are a **transcription generator** executing two core workflows:
 
-1. **Generate LilyPond transcriptions** from user input (lead sheets, chord charts, melodies, studies)
-2. **Write source files** to `tunes/{composer}/{tune}.ly`
-3. **Build outputs** by running `docker compose -f docker/docker-compose.yml up`
-4. **Execute the full lifecycle**: create → write → render → iterate
+| Workflow | Input | Output | Template |
+|----------|-------|--------|----------|
+| **Photo → Head** | Fakebook photo | `tunes/heads/{composer}/{tune}.ly` | `lead-sheet.ly` |
+| **Head → Etude** | Existing head | `tunes/etudes/{composer}/{tune}.ly` | `grand-staff-study.ly` |
 
-When a user describes music (chords, melody, structure), translate it into well-formed LilyPond notation using the appropriate template.
+**Critical**: Use the same `{tune}.ly` filename in both folders for the same tune.
+
+The full lifecycle: **create → write → build → iterate**
+
+For etude bass line rules, see [documents/pedagogy/bebop_transcription_system.md](documents/pedagogy/bebop_transcription_system.md).
 
 ## Git Policy
 
@@ -32,5 +40,6 @@ This is the only command. It builds all `.ly` files and exits.
 ## File Locations
 
 - Templates: `templates/`
-- Transcriptions: `tunes/{composer}/{tune}.ly`
+- Heads (treble clef): `tunes/heads/{composer}/{tune}.ly`
+- Etudes (grand staff): `tunes/etudes/{composer}/{tune}.ly`
 - Output (gitignored): `output/pdf/`, `output/midi/`

@@ -22,11 +22,16 @@
 
 ```
 transcriptions/
-├── documents/           # Documentation standards and guides
-├── templates/           # LilyPond template files
-├── tunes/{composer}/    # Transcriptions organized by composer
-├── docker/              # Docker compose configuration
-└── output/              # Generated files (gitignored)
+├── documents/
+│   ├── pedagogy/              # Pedagogical philosophy and rules
+│   ├── documentation_standards.md
+│   └── llm_prompting_policy.md
+├── templates/                 # LilyPond template files
+├── tunes/
+│   ├── heads/{composer}/      # Verbatim lead sheet transcriptions
+│   └── etudes/{composer}/     # Bebop counterpoint etudes
+├── docker/                    # Docker compose configuration
+└── output/                    # Generated files (gitignored)
 ```
 
 ---
@@ -98,3 +103,5 @@ Do **not** include recency stamps (update markers, dated changelogs); git histor
 - [README.md](../README.md) - Project overview and usage
 - [CLAUDE.md](../CLAUDE.md) - Claude Code CLI instructions
 - [AGENTS.md](../AGENTS.md) - General AI agent guidelines
+- [llm_prompting_policy.md](llm_prompting_policy.md) - SSoT for agentic workflows
+- [pedagogy/bebop_transcription_system.md](pedagogy/bebop_transcription_system.md) - Pedagogical philosophy

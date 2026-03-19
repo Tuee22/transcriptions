@@ -5,6 +5,8 @@
 **Referenced by**: [documents/documentation_standards.md](documents/documentation_standards.md)
 
 > **Purpose**: Guidelines for AI assistants working in this repository.
+>
+> **SSoT for agentic workflows**: [documents/llm_prompting_policy.md](documents/llm_prompting_policy.md)
 
 ---
 
@@ -12,20 +14,21 @@
 
 You are a **transcription generator**. Your primary job is to execute the full transcription lifecycle:
 
-1. **Generate** – Translate user input (chord charts, melodies, structures, recordings) into LilyPond notation
-2. **Write** – Create source files at `tunes/{composer}/{tune}.ly` using appropriate templates
+1. **Generate** – Translate user input into LilyPond notation
+2. **Write** – Create source files using appropriate templates
 3. **Build** – Run `docker compose -f docker/docker-compose.yml up`
 4. **Iterate** – Refine based on user feedback, re-render, repeat
 
-### Workflow Example
+### Two Core Workflows
 
-```
-User: "Create a lead sheet for Autumn Leaves in Gm"
-Agent:
-  1. Creates tunes/kosma/autumn-leaves.ly using templates/lead-sheet.ly
-  2. Runs: docker compose -f docker/docker-compose.yml up
-  3. Reports success, shows path to output/pdf/autumn-leaves.pdf
-```
+| Workflow | Input | Output | Template |
+|----------|-------|--------|----------|
+| Photo → Head | Fakebook photo | `tunes/heads/{composer}/{tune}.ly` | `lead-sheet.ly` |
+| Head → Etude | Existing head | `tunes/etudes/{composer}/{tune}.ly` | `grand-staff-study.ly` |
+
+**Critical**: Use the same `{tune}.ly` filename in both `heads/` and `etudes/` for the same tune.
+
+See [documents/llm_prompting_policy.md](documents/llm_prompting_policy.md) for detailed workflow specifications.
 
 ---
 
@@ -65,10 +68,12 @@ This is the only command. It builds all `.ly` files in `tunes/` and exits.
 | Directory | Purpose |
 |-----------|---------|
 | `templates/` | Starting templates for new transcriptions |
-| `tunes/{composer}/` | Transcription source files |
+| `tunes/heads/{composer}/` | Verbatim lead sheet transcriptions (treble clef) |
+| `tunes/etudes/{composer}/` | Bebop counterpoint etudes (grand staff) |
 | `output/pdf/` | Generated PDFs (gitignored) |
 | `output/midi/` | Generated MIDI files (gitignored) |
 | `docker/` | Docker compose configuration |
+| `documents/pedagogy/` | Pedagogical philosophy and rules |
 
 ---
 
@@ -82,4 +87,6 @@ Follow the SSoT policy and naming conventions defined in [documents/documentatio
 
 - [README.md](README.md) - Project overview and usage
 - [CLAUDE.md](CLAUDE.md) - Claude Code CLI specific instructions
+- [documents/llm_prompting_policy.md](documents/llm_prompting_policy.md) - SSoT for agentic workflows
+- [documents/pedagogy/bebop_transcription_system.md](documents/pedagogy/bebop_transcription_system.md) - Pedagogical philosophy
 - [documents/documentation_standards.md](documents/documentation_standards.md) - Documentation practices
