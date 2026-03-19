@@ -1,0 +1,21 @@
+services:
+  # LilyPond rendering service
+  render:
+    image: jeandeaual/lilypond:latest
+    volumes:
+      - .:/work
+    working_dir: /work
+    # Default entrypoint is lilypond, override with command
+
+  # File watcher service (polling-based, no host dependencies)
+  watch:
+    image: jeandeaual/lilypond:latest
+    volumes:
+      - .:/work
+    working_dir: /work
+    entrypoint: ["/bin/sh"]
+    command: ["/work/scripts/watch.sh"]
+    environment:
+      - WATCH_FILE=${WATCH_FILE:-}
+    tty: true
+    stdin_open: true
