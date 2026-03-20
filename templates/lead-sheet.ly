@@ -3,39 +3,26 @@
 % =============================================================================
 % LEAD SHEET TEMPLATE
 % For transcriptions with melody and chord symbols
+% Real Book style with LilyJazz fonts
 % =============================================================================
+
+% Include jazz styling (fonts, layout, chord notation)
+\include "includes/jazz-style.ily"
 
 \header {
   title = "Tune Title"
   composer = "Composer Name"
   arranger = "Transcribed by: Your Name"
   % copyright = "For educational use only"
-  tagline = ##f
 }
 
 % -----------------------------------------------------------------------------
-% PAPER AND LAYOUT
+% PAPER AND LAYOUT OVERRIDES
+% (Base settings come from jazz-style.ily)
 % -----------------------------------------------------------------------------
 
 \paper {
   #(set-paper-size "letter")
-  top-margin = 15\mm
-  bottom-margin = 15\mm
-  left-margin = 15\mm
-  right-margin = 15\mm
-  indent = 0
-  ragged-last-bottom = ##t
-}
-
-\layout {
-  \context {
-    \Score
-    \override SpacingSpanner.base-shortest-duration = #(ly:make-moment 1/16)
-  }
-  \context {
-    \ChordNames
-    chordChanges = ##t
-  }
 }
 
 % -----------------------------------------------------------------------------

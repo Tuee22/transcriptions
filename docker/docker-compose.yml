@@ -1,6 +1,8 @@
 services:
   lilypond:
-    image: jeandeaual/lilypond:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ..:/work
     working_dir: /work
